@@ -21,3 +21,26 @@ table {
   width: 90%;
   margin-bottom: 20px;
 }
+
+.form {
+  border: 1px solid gray;
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 11px;
+}
+
+mat-form-field {
+  width: 80%;
+}
+
+.form-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  flex-direction: column;
+}

@@ -25,6 +25,8 @@ export class AppService {
   cardsSubject: BehaviorSubject<PaymentCard[]> = new BehaviorSubject([]);
   typeSubject: BehaviorSubject<PaymentCardType[]> = new BehaviorSubject([]);
 
+  paymentCards: PaymentCard[];
+
   constructor(private http: HttpClient) { }
 
   getAllCities() {
@@ -67,7 +69,8 @@ export class AppService {
     this.http.get<{ message: string, payload: PaymentCard[] }>('http://localhost:8080/getAllPaymentCards').subscribe(
       (response) => {
         console.log('Get All Cards - ', response.message);
-        this.cardsSubject.next(response.payload)
+        this.cardsSubject.next(response.payload);
+        this.paymentCards = response.payload;
       }
     )
   }
@@ -104,6 +107,37 @@ export class AppService {
       (response) => {
         console.log('Get All Vip Contracts - ', response.message);
         this.vipContractsSubject.next(response.payload)
+      }
+    )
+  }
+
+  addNewCard(card: PaymentCard) {
+    const body = {
+      id_tipa_platne_kartice: card.id_tipa_platne_kartice,
+      id_korisnika: card.id_korisnika,
+      datum_isteka: card.datum_isteka,
+      broj_kartice: card.broj_kartice
+    };
+    this.http.post<any>('http://localhost:8080/addPaymentCard', body).subscribe(
+      (response) => {
+        console.log(response);
+        console.log('Add New Payment Card - ', response.message);
+        this.getAllCards();
+      }
+    )
+  }
+
+  addNewCardType(name: string, type: string) {
+    const body = {
+      new_payment_card: {
+        naziv: name,
+        vrsta_tipa: type
+      }
+    }
+    this.http.post<any>('http://localhost:8080/addPaymentCardType', body).subscribe(
+      (response) => {
+        console.log('Add New Payment Card Type - ', response.message);
+        this.getAllCardTypes();
       }
     )
   }

@@ -13,6 +13,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
 import { HotelsAndCitiesComponent } from './hotels-and-cities/hotels-and-cities.component';
 import { ContractsComponent } from './contracts/contracts.component';
 import { UsersAndCardsComponent } from './users-and-cards/users-and-cards.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { UsersAndCardsComponent } from './users-and-cards/users-and-cards.compon
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

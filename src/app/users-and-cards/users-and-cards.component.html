@@ -48,7 +48,7 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
     </table>
-    <button mat-raised-button color="primary">Add a new card</button>
+    <button mat-raised-button color="primary" (click)="switchAddingModeCards()">Add a new card</button>
 </div>
 <hr>
 <div class="table">
@@ -67,6 +67,58 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
     </table>
-    <button mat-raised-button color="primary">Add a new card type</button>
+    <button mat-raised-button color="primary" (click)="switchAddingModeTypes()">Add a new card type</button>
 </div>
 <hr>
+<div class="form-div" *ngIf="addingNewCard">
+    <form class="form" [formGroup]="addCardForm">
+        <mat-form-field>
+            <mat-label>Card Number</mat-label>
+            <input matInput type="number" formControlName="cardNumber">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date of Expiry</mat-label>
+            <input matInput type="text" formControlName="dateOfExpiry">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Card Type</mat-label>
+            <mat-select formControlName="cardType">
+                <mat-option *ngFor="let type of types" [value]="type.id_tipa_platne_kartice">
+                    {{type.naziv_tipa_platne_kartice}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>User</mat-label>
+            <mat-select formControlName="user">
+                <mat-option *ngFor="let user of users" [value]="user.id_korisnika">
+                    {{user.ime_korisnika}} {{user.prezime_korisnika}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="form-button" mat-raised-button color="primary" (click)="addNewCard()">Confirm</button>
+    </form>
+</div>
+<div class="form-div" *ngIf="addingNewType">
+    <form class="form" [formGroup]="addTypeForm">
+        <mat-form-field>
+            <mat-label>Type Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Card Type</mat-label>
+            <mat-select formControlName="type">
+                <mat-option value="mastercard">
+                    mastercard
+                </mat-option>
+                <mat-option value="visa">
+                    visa
+                </mat-option>
+                <mat-option value="dina">
+                    dina
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="form-button" mat-raised-button color="primary" (click)="addNewCardType()">Confirm</button>
+    </form>
+</div>
