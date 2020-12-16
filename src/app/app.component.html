@@ -1,0 +1,11 @@
+<mat-toolbar color="warn">
+    <span>Travel Base</span>
+    <span class="divider"></span>
+    <button mat-button [routerLink]="['/arrangements']" routerLinkActive="router-link-active">Arrangements</button>
+    <button mat-button [routerLink]="['/reservations']" routerLinkActive="router-link-active">Reservations</button>
+    <button mat-button [routerLink]="['/hotelsAndCities']" routerLinkActive="router-link-active">Hotels &
+        Cities</button>
+    <button mat-button [routerLink]="['/contracts']" routerLinkActive="router-link-active">Contracts</button>
+    <button mat-button [routerLink]="['/usersAndCards']" routerLinkActive="router-link-active">Users & Cards</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
