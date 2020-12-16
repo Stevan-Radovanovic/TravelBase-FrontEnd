@@ -15,8 +15,8 @@ export class HotelsAndCitiesComponent implements OnInit, OnDestroy {
   constructor(public service: AppService) { }
 
   ngOnInit(): void {
-    this.service.getAllCities();
-    this.service.getAllHotels();
+    this.service.getAllRegularContracts();
+    this.service.getAllVipContracts();
     this.citiesSubscription = this.service.citiesSubject.subscribe((cities) => console.log(cities));
     this.hotelsSubscription = this.service.hotelsSubject.subscribe((hotels) => console.log(hotels));
 
