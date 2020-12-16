@@ -1,1 +1,47 @@
-<p>hotels-and-cities works!</p>
+<hr>
+<div class="table">
+    <table mat-table [dataSource]="hotels" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="naziv_hotela">
+            <th mat-header-cell *matHeaderCellDef> Hotel Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.ime_hotela}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="zvezdice">
+            <th mat-header-cell *matHeaderCellDef> Stars </th>
+            <td mat-cell *matCellDef="let element"> {{element.zvezdice}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="id_grada">
+            <th mat-header-cell *matHeaderCellDef> City ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_grada}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+    </table>
+    <button mat-raised-button color="primary">Add a new hotel</button>
+</div>
+<hr>
+<div class="table">
+    <table mat-table [dataSource]="cities" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id_grada">
+            <th mat-header-cell *matHeaderCellDef> City ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_grada}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="naziv_grada">
+            <th mat-header-cell *matHeaderCellDef> City Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.naziv_grada}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="broj_hotela_u_gradu">
+            <th mat-header-cell *matHeaderCellDef> Number of Hotels </th>
+            <td mat-cell *matCellDef="let element"> {{element.broj_hotela_u_gradu}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+    </table>
+</div>

@@ -5,6 +5,7 @@ import { Arrangement } from './models/arrangement.model';
 import { City } from './models/city.model';
 import { Contract } from './models/contract.model';
 import { Hotel } from './models/hotel.model';
+import { PaymentCardType } from './models/payment-card-type.model';
 import { PaymentCard } from './models/payment-card.model';
 import { Reservation } from './models/reservation.model';
 import { User } from './models/user.model';
@@ -22,6 +23,7 @@ export class AppService {
   vipContractsSubject: BehaviorSubject<Contract[]> = new BehaviorSubject([]);
   usersSubject: BehaviorSubject<User[]> = new BehaviorSubject([]);
   cardsSubject: BehaviorSubject<PaymentCard[]> = new BehaviorSubject([]);
+  typeSubject: BehaviorSubject<PaymentCardType[]> = new BehaviorSubject([]);
 
   constructor(private http: HttpClient) { }
 
@@ -66,6 +68,15 @@ export class AppService {
       (response) => {
         console.log('Get All Cards - ', response.message);
         this.cardsSubject.next(response.payload)
+      }
+    )
+  }
+
+  getAllCardTypes() {
+    this.http.get<{ message: string, payload: PaymentCardType[] }>('http://localhost:8080/getAllPaymentCardTypes').subscribe(
+      (response) => {
+        console.log('Get All Card Types - ', response.message);
+        this.typeSubject.next(response.payload)
       }
     )
   }
