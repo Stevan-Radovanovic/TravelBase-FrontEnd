@@ -1,5 +1,5 @@
 export interface Hotel {
-    id_hotela: number;
+    id_hotela?: number;
     ime_hotela: string;
     zvezdice: number;
     id_grada?: number;

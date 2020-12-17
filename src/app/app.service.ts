@@ -141,4 +141,57 @@ export class AppService {
       }
     )
   }
+
+  addNewHotel(hotel: Hotel) {
+    const body = {
+      ime_hotela: hotel.ime_hotela,
+      zvezdice: hotel.zvezdice,
+      id_grada: hotel.id_grada
+
+    }
+    this.http.post<any>('http://localhost:8080/addHotel', body).subscribe(
+      (response) => {
+        console.log('Add New Hotel - ', response.message);
+        this.getAllHotels();
+        this.getAllCities();
+      }
+    )
+  }
+
+  addNewContract(contract: Contract) {
+    const body = {
+      napomena: contract.napomena,
+      datum: contract.datum,
+      id_popusta: contract.id_popusta,
+      id_zaposlenog: 1,
+      id_rezervacije: 1,
+      id_aranzmana: 1,
+      id_korisnika: 1
+
+    }
+    this.http.post<any>('http://localhost:8080/addNewContract', body).subscribe(
+      (response) => {
+        console.log('Add New Contract - ', response.message);
+        this.getAllRegularContracts();
+        this.getAllVipContracts();
+      }
+    )
+  }
+
+  addNewReservation(reservation: Reservation) {
+    const body = {
+      datum: reservation.datum,
+      prijava: reservation.prijava,
+      odjava: reservation.odjava,
+      broj_noci: reservation.broj_noci,
+      id_korisnika: 1,
+      id_aranzmana: reservation.id_aranzmana
+    }
+    this.http.post<any>('http://localhost:8080/addReservation', body).subscribe(
+      (response) => {
+        console.log('Add New Reservation - ', response.message);
+        this.getAllReservations();
+      }
+    )
+  }
 }

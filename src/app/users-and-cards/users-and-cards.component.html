@@ -50,26 +50,6 @@
     </table>
     <button mat-raised-button color="primary" (click)="switchAddingModeCards()">Add a new card</button>
 </div>
-<hr>
-<div class="table">
-    <table mat-table [dataSource]="types" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="id_tipa_platne_kartice">
-            <th mat-header-cell *matHeaderCellDef> Payment Card Type ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.id_tipa_platne_kartice}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="naziv_tipa_platne_kartice">
-            <th mat-header-cell *matHeaderCellDef> Type </th>
-            <td mat-cell *matCellDef="let element"> {{element.naziv_tipa_platne_kartice}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
-    </table>
-    <button mat-raised-button color="primary" (click)="switchAddingModeTypes()">Add a new card type</button>
-</div>
-<hr>
 <div class="form-div" *ngIf="addingNewCard">
     <form class="form" [formGroup]="addCardForm">
         <mat-form-field>
@@ -99,6 +79,26 @@
         <button class="form-button" mat-raised-button color="primary" (click)="addNewCard()">Confirm</button>
     </form>
 </div>
+<hr>
+<div class="table">
+    <table mat-table [dataSource]="types" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id_tipa_platne_kartice">
+            <th mat-header-cell *matHeaderCellDef> Payment Card Type ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id_tipa_platne_kartice}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="naziv_tipa_platne_kartice">
+            <th mat-header-cell *matHeaderCellDef> Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.naziv_tipa_platne_kartice}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+    </table>
+    <button mat-raised-button color="primary" (click)="switchAddingModeTypes()">Add a new card type</button>
+</div>
+<hr>
 <div class="form-div" *ngIf="addingNewType">
     <form class="form" [formGroup]="addTypeForm">
         <mat-form-field>

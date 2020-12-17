@@ -38,6 +38,35 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <button mat-raised-button color="primary">Add a new reservation</button>
+    <button mat-raised-button color="primary" (click)="switchAddingModeReservations()">Add a new reservation</button>
 </div>
 <hr>
+<div class="form-div" *ngIf="addingNewReservation">
+    <form class="form" [formGroup]="addReservationForm">
+        <mat-form-field>
+            <mat-label>No of nights</mat-label>
+            <input matInput type="number" formControlName="broj_noci">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput type="text" formControlName="datum">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Check In</mat-label>
+            <input matInput type="text" formControlName="prijava">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Check Out</mat-label>
+            <input matInput type="text" formControlName="odjava">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Arrangement</mat-label>
+            <mat-select formControlName="aranzman">
+                <mat-option *ngFor="let arr of arrangements" [value]="arr.id_aranzmana">
+                    {{arr.naziv_aranzmana}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="form-button" mat-raised-button color="primary" (click)="addNewReservation()">Confirm</button>
+    </form>
+</div>
