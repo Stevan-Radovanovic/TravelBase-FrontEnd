@@ -13,13 +13,16 @@ import { Reservation } from '../models/reservation.model';
 export class ReservationsComponent implements OnInit, OnDestroy {
 
   reservationSubscription: Subscription;
+  selectedReservation: Reservation;
 
   reservations: Reservation[] = [];
   arrangements: Arrangement[] = [];
   displayedColumns = ["broj_noci", "datum", "prijava", "odjava", "naziv_aranzmana", "actions"];
 
   addingNewReservation = false;
+  editingReservation = false;
   addReservationForm: FormGroup;
+  editReservationForm: FormGroup;
 
   constructor(public service: AppService) { }
 
@@ -41,6 +44,12 @@ export class ReservationsComponent implements OnInit, OnDestroy {
         aranzman: new FormControl(null)
       }
     )
+
+    this.editReservationForm = new FormGroup(
+      {
+        name: new FormControl(null),
+      }
+    )
   }
 
   addNewReservation() {
@@ -54,9 +63,22 @@ export class ReservationsComponent implements OnInit, OnDestroy {
     this.service.addNewReservation(reservation);
   }
 
+  editReservation() {
+    this.service.updateReservation(this.editReservationForm.get('name').value.toString(), this.selectedReservation.id_rezervacije);
+  }
+
   switchAddingModeReservations() {
     if (!this.addingNewReservation) this.addingNewReservation = true;
+    this.editingReservation = false;
   }
+
+  switchEditingModeReservations(res: Reservation) {
+    if (!this.editingReservation) this.editingReservation = true;
+    this.addingNewReservation = false;
+    this.selectedReservation = res;
+    this.editReservationForm.controls['name'].setValue(this.selectedReservation.naziv_aranzmana);
+  }
+
 
   ngOnDestroy() {
     this.reservationSubscription?.unsubscribe();

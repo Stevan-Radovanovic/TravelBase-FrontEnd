@@ -14,12 +14,22 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Edit </th>
-            <td mat-cell *matCellDef="let element"> <button mat-button color="primary">
+            <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+                    (click)="switchEditingModeReservations(element)">
                     Click here to edit</button> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+</div>
+<div class="form-div" *ngIf="editingArrangement">
+    <form class="form" [formGroup]="editArrangementForm">
+        <mat-form-field>
+            <mat-label>Arrangement Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <button class="form-button" mat-raised-button color="primary" (click)="editArrangement()">Confirm</button>
+    </form>
 </div>
 <hr>

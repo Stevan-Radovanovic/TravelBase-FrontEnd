@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Arrangement } from './models/arrangement.model';
@@ -24,6 +24,8 @@ export class AppService {
   usersSubject: BehaviorSubject<User[]> = new BehaviorSubject([]);
   cardsSubject: BehaviorSubject<PaymentCard[]> = new BehaviorSubject([]);
   typeSubject: BehaviorSubject<PaymentCardType[]> = new BehaviorSubject([]);
+
+  public errorMessage: string = null;
 
   paymentCards: PaymentCard[];
 
@@ -192,6 +194,38 @@ export class AppService {
         console.log('Add New Reservation - ', response.message);
         this.getAllReservations();
       }
+    )
+  }
+
+  updateReservation(name: string, id: number) {
+    const body = {
+      naziv_aranzmana: name,
+      id_rezervacije: id
+    }
+    this.http.put<any>('http://localhost:8080/updateReservation', body).subscribe(
+      (response) => {
+        console.log('Add New Reservation - ', response.message);
+        this.getAllReservations();
+      },
+      (error: HttpErrorResponse) => {
+        this.errorMessage = error.error.message;
+        console.log('Error -', this.errorMessage);
+        setTimeout(() => { this.errorMessage = null }, 4000);
+      }
+    )
+  }
+
+  updateArrangement(name: string, id: number) {
+    const body = {
+      novi_naziv: name,
+      id_aranzmana: id
+    }
+    this.http.put<any>('http://localhost:8080/updateArrangement', body).subscribe(
+      (response) => {
+        console.log('Add New Arrangement - ', response.message);
+        this.getAllReservations();
+        this.getAllArrangements();
+      },
     )
   }
 }

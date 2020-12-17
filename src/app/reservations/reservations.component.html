@@ -30,7 +30,8 @@
 
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Edit </th>
-            <td mat-cell *matCellDef="let element"> <button mat-button color="primary">
+            <td mat-cell *matCellDef="let element"> <button mat-button color="primary"
+                    (click)="switchEditingModeReservations(element)">
                     Click here to edit</button> </td>
         </ng-container>
 
@@ -68,5 +69,15 @@
             </mat-select>
         </mat-form-field>
         <button class="form-button" mat-raised-button color="primary" (click)="addNewReservation()">Confirm</button>
+    </form>
+</div>
+<p *ngIf="service.errorMessage" style="font-size: 14px; color: red; text-align: center;">{{service.errorMessage}}</p>
+<div class="form-div" *ngIf="editingReservation">
+    <form class="form" [formGroup]="editReservationForm">
+        <mat-form-field>
+            <mat-label>Arrangement Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <button class="form-button" mat-raised-button color="primary" (click)="editReservation()">Confirm</button>
     </form>
 </div>
