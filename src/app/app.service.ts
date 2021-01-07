@@ -29,7 +29,8 @@ export class AppService {
 
   paymentCards: PaymentCard[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllCities() {
     this.http.get<{ message: string, payload: City[] }>('http://localhost:8080/getCities').subscribe(

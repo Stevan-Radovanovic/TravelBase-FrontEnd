@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "sw": "http-server -p 2727 -c-1 dist/Bases2-FrontEnd/"
+    "sw": "http-server -p 2729 -c-1 dist/Bases2-FrontEnd/",
+    "sw2": "ng build --prod; http-server -p 2729 -c-1 dist/Bases2-FrontEnd/"
   },
   "private": true,
   "dependencies": {

@@ -26,5 +26,8 @@
         ]
       }
     }
-  ]
+  ],
+  "appData": {
+    "updateMessage": "This message should appear with each new update of the app!"
+  }
 }

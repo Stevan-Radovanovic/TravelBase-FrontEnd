@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
+import { SwService } from './sw.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,10 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(private sw: SwService) {
+    this.sw.setUpdates();
+  }
 
   title = 'Bases2-FrontEnd';
 
