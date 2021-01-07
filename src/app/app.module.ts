@@ -15,6 +15,8 @@ import { ContractsComponent } from './contracts/contracts.component';
 import { UsersAndCardsComponent } from './users-and-cards/users-and-cards.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -36,7 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatTableModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
