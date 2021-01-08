@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SwService {
 
-  constructor(private updates: SwUpdate) {
+  readonly vapidPublicKey = "BKrUXmFqjDnnusQVXAR_ExPUMQxdyRn_9pkMt8lc7Ntw4A4SLFRtDkxnWy-expxHcXfiXlpMYktMFsPu8-H7CAg";
+  pushSubscription: PushSubscription;
+
+  constructor(private updates: SwUpdate, private push: SwPush) {
 
   }
 
@@ -27,4 +30,16 @@ export class SwService {
       console.log('New version is', event.current);
     });
   }
+
+  subscribeToPush() {
+    this.push.requestSubscription({
+      serverPublicKey: this.vapidPublicKey
+    })
+      .then((sub: PushSubscription) => {
+        console.log('Push Subscription', sub);
+        this.pushSubscription = sub;
+      })
+      .catch(err => console.error("Could not subscribe to notifications", err));
+  }
 }
+

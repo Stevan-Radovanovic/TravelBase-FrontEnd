@@ -11,6 +11,7 @@ export class AppComponent {
 
   constructor(private sw: SwService) {
     this.sw.setUpdates();
+    this.sw.subscribeToPush();
   }
 
   title = 'Bases2-FrontEnd';
