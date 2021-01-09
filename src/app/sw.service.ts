@@ -15,6 +15,7 @@ export class SwService {
 
   setUpdates() {
     console.log('Service Worker Active');
+    if (!this.updates.isEnabled) return;
     this.updates.available.subscribe(event => {
       console.log('Current version is', event.current);
       console.log('Available version is', event.available);
@@ -32,6 +33,8 @@ export class SwService {
   }
 
   subscribeToPush() {
+
+    if (!this.push.isEnabled) return;
     this.push.requestSubscription({
       serverPublicKey: this.vapidPublicKey
     })
